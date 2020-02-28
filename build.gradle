@@ -1,0 +1,32 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.0.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+	id 'java'
+}
+
+group = 'com.insight.learning'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	implementation 'com.twitter:hbc-core:2.2.0'
+	compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.5'
+	compile 'org.elasticsearch.client:elasticsearch-rest-high-level-client:6.4.0'
+	compile 'com.google.code.gson:gson:2.8.5'
+	compile (group: 'org.apache.kafka', name: 'kafka-clients', version: '2.4.0'){
+		exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+	}
+	compile group: 'org.apache.kafka', name: 'kafka-streams', version: '2.4.0'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
